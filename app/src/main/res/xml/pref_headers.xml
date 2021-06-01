@@ -1,0 +1,14 @@
+<preference-headers xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- These settings headers are only used on tablets. -->
+
+    <header
+            android:fragment="br.com.adaca.adacalite.SettingsActivity$GeneralPreferenceFragment"
+            android:title="@string/pref_header_general"
+            android:icon="@drawable/quantum_ic_settings_grey600_24"/>
+    <header
+            android:fragment="br.com.adaca.adacalite.SettingsActivity$AboutPreferenceFragment"
+            android:title="@string/pref_header_about"
+            android:icon="@drawable/ic_info_black_24dp"/>
+
+</preference-headers>

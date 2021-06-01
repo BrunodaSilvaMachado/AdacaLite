@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <Preference
+            android:title="@string/info_rights">
+        <intent android:action="adaca.com.br.adaca.SETTING_START_ACTIVITY"
+                android:targetClass="br.com.adaca.adacalite.LicenseActivity"
+                android:targetPackage="br.com.adaca.adacalite"/>
+    </Preference>
+
+    <Preference
+        android:title="@string/about_adaca">
+        <intent android:action="android.intent.action.VIEW"
+                android:data="https:www.adaca.com.br/#sobre"/>
+    </Preference>
+
+    <Preference
+            android:key="numero_modelo"
+            android:title="@string/model_number"
+            android:summary="">
+    </Preference>
+
+    <Preference
+            android:key="app_version"
+            android:title="@string/app_version"
+            android:summary="">
+    </Preference>
+
+</PreferenceScreen>

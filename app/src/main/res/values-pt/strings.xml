@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">AdacaLite</string>
+    <string name="navigation_drawer_open">Abrir a gaveta de navegação</string>
+    <string name="navigation_drawer_close">Fechar a gaveta de navegação</string>
+    <string name="nav_header_title">Desconhecido</string>
+    <string name="nav_header_subtitle">Desconhecido</string>
+    <string name="nav_header_desc">Cabeçalho de navegação</string>
+    <string name="action_settings">Configurações</string>
+    <string name="title_setting_list">Configurações</string>
+    <string name="title_setting_detail">Detalhes da Configuração</string>
+    <string name="info_rights">Informações legais</string>
+    <string name="about_adaca">Sobre o ADACA</string>
+    <string name="model_number">Numero do modelo</string>
+    <string name="app_version">Versão do aplicativo</string>
+    <string name="pref_header_general">Geral</string>
+    <string name="pref_header_about">Sobre</string>
+    <string name="servlet_address">Endereço do servlet</string>
+    <string name="servlet_address_detail">Informe o caminho da url do servlet</string>
+    <string name="url_protocol_title">Tipo de Protocolo</string>
+    <string name="url_port_title">Porta</string>
+    <string name="no_permission_read_contacts_alert">Permissão para ler os contatos é necessaria</string>
+    <string name="alert">Alerta</string>
+    <string name="logotipo_adaca">Logotipo ADACA letra A</string>
+    <string name="no_connectivity_service">Erro em checar a conexão. Verifique se existe uma conexão de dados.</string>
+    <string name="low_connection">"Aguardando por conexão. "</string>
+</resources>
