@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
@@ -27,6 +28,7 @@ import static android.Manifest.permission.READ_CONTACTS;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    final HomeFragment homeFragment = HomeFragment.newInstance();
     private static final int SETTINGS_ACTION = 1;
 
     @Override
@@ -34,8 +36,8 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar.setTitle("");
         setSupportActionBar(toolbar);
-        toolbar.setVisibility(View.GONE);
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -47,7 +49,6 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         addNavigationHeader(navigationView.getHeaderView(0));
 
-        HomeFragment homeFragment = HomeFragment.newInstance();
         if (getSupportFragmentManager().findFragmentByTag("homeFragment") == null) {
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction.add(R.id.main_frame_layout, homeFragment, "homeFragment");
@@ -60,9 +61,9 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        HomeFragment homeFragment = (HomeFragment) getSupportFragmentManager().findFragmentByTag("homeFragment");
+        /*HomeFragment homeFragment = (HomeFragment) getSupportFragmentManager().findFragmentByTag("homeFragment");
         if(homeFragment == null)
-            homeFragment = HomeFragment.newInstance();
+            homeFragment = HomeFragment.newInstance();*/
 
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
@@ -75,9 +76,9 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     protected void onDestroy() {
-        HomeFragment homeFragment = (HomeFragment) getSupportFragmentManager().findFragmentByTag("homeFragment");
+        /*HomeFragment homeFragment = (HomeFragment) getSupportFragmentManager().findFragmentByTag("homeFragment");
         if(homeFragment == null)
-            homeFragment = HomeFragment.newInstance();
+            homeFragment = HomeFragment.newInstance();*/
 
         homeFragment.onNavigation("logout");
         super.onDestroy();
@@ -88,9 +89,9 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        HomeFragment homeFragment = (HomeFragment) getSupportFragmentManager().findFragmentByTag("homeFragment");
+        /*HomeFragment homeFragment = (HomeFragment) getSupportFragmentManager().findFragmentByTag("homeFragment");
         if(homeFragment == null)
-            homeFragment = HomeFragment.newInstance();
+            homeFragment = HomeFragment.newInstance();*/
 
         if (id == R.id.nav_manage) {
             Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
@@ -128,7 +129,7 @@ public class MainActivity extends AppCompatActivity
         if (requestCode == 1) {
             if (grantResults.length == 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 if (!mayRequestReadContacts()) {
-                    new AlertDialog.Builder(this)
+                    new AlertDialog.Builder(MainActivity.this)
                             .setTitle(R.string.alert)
                             .setMessage(R.string.no_permission_read_contacts_alert)
                             .setNeutralButton("OK", (dialogInterface, i) -> System.exit(1))
@@ -163,5 +164,20 @@ public class MainActivity extends AppCompatActivity
         }
         requestPermissions(new String[]{READ_CONTACTS}, 1);
         return false;
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int itemId = item.getItemId();
+        if(itemId == R.id.action_reload){
+            homeFragment.reload();
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
