@@ -2,29 +2,29 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
     <PreferenceCategory
-        android:title="@string/servlet_address">
+            android:title="@string/servlet_address" android:textColor="#2E7D32">
 
         <Preference
-            android:title="@string/url_href_title"
-            android:key="adaca.servlet.address"
-            android:defaultValue="@string/servlet_address"/>
+                android:title="@string/url_href_title"
+                android:key="adaca.servlet.address"
+                android:defaultValue="@string/servlet_address"/>
         <ListPreference
-            android:key="url.protocol"
-            android:title="@string/url_protocol_title"
-            android:defaultValue="http://"
-            android:entries="@array/pref.protocol.titles"
-            android:entryValues="@array/pref.protocol.values"
-            android:negativeButtonText="@null"
-            android:positiveButtonText="@null"
+                android:key="url.protocol"
+                android:title="@string/url_protocol_title"
+                android:defaultValue="http://"
+                android:entries="@array/pref.protocol.titles"
+                android:entryValues="@array/pref.protocol.values"
+                android:negativeButtonText="@null"
+                android:positiveButtonText="@null"
         />
         <EditTextPreference
-            android:key="url.host"
-            android:title="@string/url_host_title"
-            android:defaultValue="@string/url_host_default"
-            android:selectAllOnFocus="true"
-            android:inputType="textAutoComplete"
-            android:singleLine="true"
-            />
+                android:key="url.host"
+                android:title="@string/url_host_title"
+                android:defaultValue="@string/url_host_default"
+                android:selectAllOnFocus="true"
+                android:inputType="textAutoComplete"
+                android:singleLine="true"
+        />
         <EditTextPreference
                 android:key="url.port"
                 android:title="@string/url_port_title"
