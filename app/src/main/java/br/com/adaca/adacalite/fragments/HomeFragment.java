@@ -23,7 +23,6 @@ public class HomeFragment extends Fragment implements SharedPreferences.OnShared
     private HomeViewModel mViewModel;
     private WebView mWebView;
     private PreferenceService preferenceService;
-    private SwipeRefreshLayout swipeRefreshLayout;
 
     public HomeFragment(){/*Required empty constructor*/}
 
@@ -45,12 +44,7 @@ public class HomeFragment extends Fragment implements SharedPreferences.OnShared
 
         mWebView = view.findViewById(R.id.home_webview);
 
-        swipeRefreshLayout = view.findViewById(R.id.swipe_container);
         webViewSetup();
-        swipeRefreshLayout.setOnRefreshListener(()->{
-            if(mWebView != null)
-                mWebView.reload();
-        });
         return view;
     }
 
@@ -78,7 +72,7 @@ public class HomeFragment extends Fragment implements SharedPreferences.OnShared
             return;
 
         mWebView.setWebChromeClient((new WebChromeClient()));
-        mWebView.setWebViewClient(new MyWebViewClient());
+        mWebView.setWebViewClient(new WebViewClient());
         //mWebView.addJavascriptInterface(this, "adaca");
         mWebView.getSettings().setJavaScriptEnabled(true);
         mWebView.getSettings().setLoadWithOverviewMode(true);
@@ -113,11 +107,7 @@ public class HomeFragment extends Fragment implements SharedPreferences.OnShared
         mWebView.goBack();
     }
 
-    private class MyWebViewClient extends WebViewClient{
-        @Override
-        public void onPageFinished(WebView view, String url) {
-            swipeRefreshLayout.setRefreshing(false);
-            super.onPageFinished(view, url);
-        }
+    public void reload(){
+        if(mWebView != null) mWebView.reload();
     }
 }
