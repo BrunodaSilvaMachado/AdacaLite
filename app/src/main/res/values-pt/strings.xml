@@ -11,7 +11,7 @@
     <string name="title_setting_detail">Detalhes da Configuração</string>
     <string name="info_rights">Informações legais</string>
     <string name="about_adaca">Sobre o ADACA</string>
-    <string name="model_number">Numero do modelo</string>
+    <string name="model_number">Número do modelo</string>
     <string name="app_version">Versão do aplicativo</string>
     <string name="pref_header_general">Geral</string>
     <string name="pref_header_about">Sobre</string>
@@ -25,4 +25,7 @@
     <string name="no_connectivity_service">Erro em checar a conexão. Verifique se existe uma conexão de dados.</string>
     <string name="low_connection">"Aguardando por conexão. "</string>
     <string name="action_reload">Atualizar</string>
+    <string name="permission_denied">Permissões Negadas</string>
+    <string name="msg_request_permission">Para utilizar a aplicação é necessário aceitar as permissões.</string>
+    <string name="accept">Confirmar</string>
 </resources>
