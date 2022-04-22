@@ -14,7 +14,9 @@ public class AdacaAccountsManager {
 
         if (c != null) {
             if (c.moveToFirst() && c.getCount() == 1 && c.getPosition() == 0) {
-                return new String[] {c.getString(c.getColumnIndex("display_name")),c.getString(c.getColumnIndex("photo_thumb_uri"))};
+                int displaName = c.getColumnIndex("display_name");
+                int photo = c.getColumnIndex("photo_thumb_uri");
+                return new String[] {c.getString(displaName),c.getString(photo)};
             }
             c.close();
         }

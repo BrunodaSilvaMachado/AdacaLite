@@ -1,35 +1,32 @@
 package br.com.adaca.adacalite;
 
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.fragment.app.FragmentTransaction;
-import br.com.adaca.adacalite.fragments.HomeFragment;
-import br.com.adaca.adacalite.service.AdacaAccountsManager;
-import android.view.View;
-import com.google.android.material.navigation.NavigationView;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import android.view.MenuItem;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.FragmentTransaction;
+import br.com.adaca.adacalite.fragments.HomeFragment;
+import br.com.adaca.adacalite.helper.Permissoes;
+import br.com.adaca.adacalite.service.AdacaAccountsManager;
+import com.google.android.material.navigation.NavigationView;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    final HomeFragment homeFragment = HomeFragment.newInstance();
-    private static final int SETTINGS_ACTION = 1;
+    private final HomeFragment homeFragment = HomeFragment.newInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,16 +52,15 @@ public class MainActivity extends AppCompatActivity
             fragmentTransaction.commit();
         }
 
-        mayRequestReadContacts();
+        //validar permissões
+        if (Build.VERSION.SDK_INT >= 23) {
+            Permissoes.validarPermissoes(this).launch(new String[]{READ_CONTACTS});
+        }
     }
 
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        /*HomeFragment homeFragment = (HomeFragment) getSupportFragmentManager().findFragmentByTag("homeFragment");
-        if(homeFragment == null)
-            homeFragment = HomeFragment.newInstance();*/
-
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else if(homeFragment.isGoBack()) {
@@ -76,10 +72,6 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     protected void onDestroy() {
-        /*HomeFragment homeFragment = (HomeFragment) getSupportFragmentManager().findFragmentByTag("homeFragment");
-        if(homeFragment == null)
-            homeFragment = HomeFragment.newInstance();*/
-
         homeFragment.onNavigation("logout");
         super.onDestroy();
     }
@@ -89,13 +81,9 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        /*HomeFragment homeFragment = (HomeFragment) getSupportFragmentManager().findFragmentByTag("homeFragment");
-        if(homeFragment == null)
-            homeFragment = HomeFragment.newInstance();*/
-
         if (id == R.id.nav_manage) {
             Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
-            startActivityForResult(intent, SETTINGS_ACTION);
+            startActivity(intent);
         }
         else if(id == R.id.nav_home){
             homeFragment.onNavigation("painel");
@@ -124,21 +112,6 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if (requestCode == 1) {
-            if (grantResults.length == 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                if (!mayRequestReadContacts()) {
-                    new AlertDialog.Builder(MainActivity.this)
-                            .setTitle(R.string.alert)
-                            .setMessage(R.string.no_permission_read_contacts_alert)
-                            .setNeutralButton("OK", (dialogInterface, i) -> System.exit(1))
-                            .show();
-                }
-            }
-        }
-    }
-
     private void addNavigationHeader(@NonNull View navigationHeader) {
         TextView textName = navigationHeader.findViewById(R.id.name_user_login);
         TextView textType = navigationHeader.findViewById(R.id.email_user_login);
@@ -147,23 +120,11 @@ public class MainActivity extends AppCompatActivity
         String[] profile = AdacaAccountsManager.readUserProfile(getBaseContext());
         textName.setText((profile[0] != null) ? profile[0] : "Adaca");
         textType.setText(AdacaAccountsManager.getUserName(getBaseContext()));
-        try {
+        if (profile[1] != null) {
             imageView.setImageURI(Uri.parse(profile[1]));
-        } catch (Exception e) {
-            Log.e("adaca::MainActivity", e.getMessage(), e);
+        }else{
             imageView.setImageResource(R.mipmap.ic_launcher_round);
         }
-    }
-
-    private boolean mayRequestReadContacts() {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
-            return true;
-        }
-        if (checkSelfPermission(READ_CONTACTS) == PackageManager.PERMISSION_GRANTED) {
-            return true;
-        }
-        requestPermissions(new String[]{READ_CONTACTS}, 1);
-        return false;
     }
 
     @Override
