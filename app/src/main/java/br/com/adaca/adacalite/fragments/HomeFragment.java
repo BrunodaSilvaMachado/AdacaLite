@@ -13,8 +13,7 @@ import android.webkit.WebViewClient;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProviders;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+import androidx.lifecycle.ViewModelProvider;
 import br.com.adaca.adacalite.R;
 import br.com.adaca.adacalite.service.PreferenceService;
 
@@ -26,6 +25,7 @@ public class HomeFragment extends Fragment implements SharedPreferences.OnShared
 
     public HomeFragment(){/*Required empty constructor*/}
 
+    @NonNull
     public static HomeFragment newInstance() {
         return new HomeFragment();
     }
@@ -34,7 +34,12 @@ public class HomeFragment extends Fragment implements SharedPreferences.OnShared
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         preferenceService = new PreferenceService(getContext());
-        mViewModel = ViewModelProviders.of(requireActivity()).get(HomeViewModel.class);
+        mViewModel = new ViewModelProvider(this, new HomeViewModel.HomeViewModelFactory()).get(HomeViewModel.class);
+        mViewModel.getWebview().observe(this, webView -> {
+            if(webView != null){
+                mWebView = webView;
+            }
+        });
     }
 
     @Override
@@ -48,21 +53,9 @@ public class HomeFragment extends Fragment implements SharedPreferences.OnShared
         return view;
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        //mWebView.setInitialScale(75);
-        if(mViewModel.getWebviewUrl() != null) {
-            mWebView.loadUrl(mViewModel.getWebviewUrl());
-        }
-        else{
-            mWebView.loadUrl(preferenceService.getServletAddress());
-        }
-    }
-
     public void onStop() {
         super.onStop();
-        mViewModel.setWebviewUrl(mWebView.getUrl());
+        mViewModel.webviewDataChange(mWebView);
     }
 
     @SuppressLint("SetJavaScriptEnabled")
@@ -81,6 +74,7 @@ public class HomeFragment extends Fragment implements SharedPreferences.OnShared
         mWebView.getSettings().setBuiltInZoomControls(false);
         mWebView.getSettings().setDisplayZoomControls(false);
         mWebView.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.NORMAL);
+        mWebView.loadUrl(preferenceService.getServletAddress());
     }
 
     @Override
