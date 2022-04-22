@@ -13,14 +13,13 @@ public class LicenseActivity extends AppCompatActivity {
 
         WebView webView = findViewById(R.id.webview_2);
 
-        webView.setInitialScale(70);
         webView.getSettings().setUseWideViewPort(true);
         webView.getSettings().setLoadWithOverviewMode(true);
         webView.getSettings().setSupportZoom(true);
         webView.getSettings().setBuiltInZoomControls(true);
         webView.getSettings().setDisplayZoomControls(true);
 
-        webView.loadUrl("file:///android_res/raw/license.html");
+        webView.loadUrl("file:///android_res/raw/license.txt");
 
     }
 }
