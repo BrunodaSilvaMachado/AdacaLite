@@ -10,6 +10,7 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.ProgressBar;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -21,6 +22,7 @@ public class HomeFragment extends Fragment implements SharedPreferences.OnShared
 
     private HomeViewModel mViewModel;
     private WebView mWebView;
+    private ProgressBar mProgressBar;
     private PreferenceService preferenceService;
 
     public HomeFragment(){/*Required empty constructor*/}
@@ -48,6 +50,7 @@ public class HomeFragment extends Fragment implements SharedPreferences.OnShared
         View view = inflater.inflate(R.layout.home_fragment, container, false);
 
         mWebView = view.findViewById(R.id.home_webview);
+        mProgressBar = view.findViewById(R.id.progressBar);
 
         webViewSetup();
         return view;
@@ -58,13 +61,19 @@ public class HomeFragment extends Fragment implements SharedPreferences.OnShared
         mViewModel.webviewDataChange(mWebView);
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        preferenceService.unRegister();
+    }
+
     @SuppressLint("SetJavaScriptEnabled")
     private void webViewSetup()
     {
         if(mWebView == null)
             return;
 
-        mWebView.setWebChromeClient((new WebChromeClient()));
+        mWebView.setWebChromeClient((new MyWebViewClient()));
         mWebView.setWebViewClient(new WebViewClient());
         //mWebView.addJavascriptInterface(this, "adaca");
         mWebView.getSettings().setJavaScriptEnabled(true);
@@ -103,5 +112,15 @@ public class HomeFragment extends Fragment implements SharedPreferences.OnShared
 
     public void reload(){
         if(mWebView != null) mWebView.reload();
+    }
+
+    private final class MyWebViewClient extends WebChromeClient{
+        @Override
+        public void onProgressChanged(WebView view, int newProgress) {
+            super.onProgressChanged(view, newProgress);
+            if (newProgress == 100){
+                mProgressBar.setVisibility(View.GONE);
+            }
+        }
     }
 }
