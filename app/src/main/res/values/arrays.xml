@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="pref.protocol.values" translatable="false"><item>http://</item> <item>https://</item></string-array>
-    <string-array name="pref.protocol.titles" translatable="false"><item>http</item> <item>https</item></string-array>
+    <string-array name="pref.protocol.values" translatable="false">
+        <item>http://</item>
+        <item>https://</item>
+    </string-array>
+    <string-array name="pref.protocol.titles" translatable="false">
+        <item>http</item>
+        <item>https</item>
+    </string-array>
 </resources>
