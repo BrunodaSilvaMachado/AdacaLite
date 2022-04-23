@@ -2,7 +2,7 @@ package br.com.adaca.adacalite.service;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
+import androidx.preference.PreferenceManager;
 import androidx.annotation.NonNull;
 import br.com.adaca.adacalite.R;
 

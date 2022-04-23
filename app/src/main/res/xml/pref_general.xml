@@ -2,7 +2,7 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
     <PreferenceCategory
-            android:title="@string/servlet_address" android:textColor="#2E7D32">
+            android:title="@string/servlet_address">
 
         <Preference
                 android:title="@string/url_href_title"
