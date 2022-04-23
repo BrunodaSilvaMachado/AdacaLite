@@ -33,4 +33,5 @@
     <string name="permission_denied">Permissions denied</string>
     <string name="msg_request_permission">To use the app it is necessary to accept the permissions.</string>
     <string name="accept">Accept</string>
+    <string name="title_activity_settings">Settings</string>
 </resources>
