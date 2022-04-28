@@ -161,17 +161,15 @@ public class SettingsActivity extends AppCompatActivity {
                 modelPreference.setSummary(Build.MODEL);
             }
 
-            if (getActivity() != null) {
-                try {
-                    pinfo = getActivity().getPackageManager().getPackageInfo(getActivity().getPackageName(), 0);
-                } catch (PackageManager.NameNotFoundException e) {
-                    Log.e(getTag(), e.getMessage());
-                    pinfo = null;
-                }
+            try {
+                pinfo = requireActivity().getPackageManager().getPackageInfo(requireActivity().getPackageName(), 0);
+            } catch (PackageManager.NameNotFoundException e) {
+                Log.e(getTag(), e.getMessage());
+                pinfo = null;
+            }
 
-                if (appVersionPreference != null) {
-                    appVersionPreference.setSummary((pinfo != null) ? pinfo.versionName : "Version unknown");
-                }
+            if (appVersionPreference != null) {
+                appVersionPreference.setSummary((pinfo != null) ? pinfo.versionName : "Version unknown");
             }
         }
 
