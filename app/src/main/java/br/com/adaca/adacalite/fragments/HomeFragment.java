@@ -25,7 +25,7 @@ public class HomeFragment extends Fragment implements SharedPreferences.OnShared
     private ProgressBar mProgressBar;
     private PreferenceService preferenceService;
 
-    public HomeFragment(){/*Required empty constructor*/}
+    public HomeFragment() {/*Required empty constructor*/}
 
     @NonNull
     public static HomeFragment newInstance() {
@@ -38,7 +38,7 @@ public class HomeFragment extends Fragment implements SharedPreferences.OnShared
         preferenceService = new PreferenceService(getContext());
         mViewModel = new ViewModelProvider(this, new HomeViewModel.HomeViewModelFactory()).get(HomeViewModel.class);
         mViewModel.getWebview().observe(this, webView -> {
-            if(webView != null){
+            if (webView != null) {
                 mWebView = webView;
             }
         });
@@ -68,9 +68,8 @@ public class HomeFragment extends Fragment implements SharedPreferences.OnShared
     }
 
     @SuppressLint("SetJavaScriptEnabled")
-    private void webViewSetup()
-    {
-        if(mWebView == null)
+    private void webViewSetup() {
+        if (mWebView == null)
             return;
 
         mWebView.setWebChromeClient((new MyWebViewClient()));
@@ -88,18 +87,17 @@ public class HomeFragment extends Fragment implements SharedPreferences.OnShared
 
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String s) {
-        if(s.contains("url.")){
-            if(mWebView != null){
+        if (s.contains("url.")) {
+            if (mWebView != null) {
                 mWebView.loadUrl(preferenceService.getServletAddress());
             }
         }
     }
 
-    public void onNavigation(String tag){
-        if(mWebView == null)
-            return;
-        //mWebView.setInitialScale(75);
-        mWebView.loadUrl(preferenceService.getLocation() + "/Jogos-Adaca/Jogos/" + tag);
+    public void onNavigation(String tag) {
+        if (mWebView != null) {
+            mWebView.loadUrl(preferenceService.getLocation() + "/Jogos-Adaca/Jogos/" + tag);
+        }
     }
 
     public boolean isGoBack() {
@@ -110,15 +108,15 @@ public class HomeFragment extends Fragment implements SharedPreferences.OnShared
         mWebView.goBack();
     }
 
-    public void reload(){
-        if(mWebView != null) mWebView.reload();
+    public void reload() {
+        if (mWebView != null) mWebView.reload();
     }
 
-    private final class MyWebViewClient extends WebChromeClient{
+    private final class MyWebViewClient extends WebChromeClient {
         @Override
         public void onProgressChanged(WebView view, int newProgress) {
             super.onProgressChanged(view, newProgress);
-            if (newProgress == 100){
+            if (newProgress == 100) {
                 mProgressBar.setVisibility(View.GONE);
             }
         }
