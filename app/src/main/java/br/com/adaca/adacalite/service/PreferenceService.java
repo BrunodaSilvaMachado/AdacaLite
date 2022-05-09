@@ -11,15 +11,13 @@ public class PreferenceService {
     private static final String URL_PROTOCOL = "url.protocol";
     private static final String URL_HOST = "url.host";
     private static final String URL_PORT = "url.port";
-
     private final String ADACA_DEFAULT_ADDRESS;
     private final String URL_HOST_DEFAULT;
     private final String URL_PORT_DEFAULT;
     private static SharedPreferences mPrefs;
     private SharedPreferences
             .OnSharedPreferenceChangeListener s = null;
-    public PreferenceService(Context context)
-    {
+    public PreferenceService(Context context) {
         mPrefs = PreferenceManager.getDefaultSharedPreferences(context);
         ADACA_DEFAULT_ADDRESS = context.getString(R.string.servlet_address_default);
         URL_HOST_DEFAULT = context.getString(R.string.url_host_default);
@@ -28,7 +26,6 @@ public class PreferenceService {
             s = (SharedPreferences.OnSharedPreferenceChangeListener) context;
             mPrefs.registerOnSharedPreferenceChangeListener(s);
         }
-
     }
 
     @NonNull
@@ -44,8 +41,7 @@ public class PreferenceService {
                 mPrefs.getString(URL_PORT,URL_PORT_DEFAULT);
     }
 
-    public void unRegister()
-    {
+    public void unRegister() {
         if(s != null){
             mPrefs.unregisterOnSharedPreferenceChangeListener(s);
             s = null;
