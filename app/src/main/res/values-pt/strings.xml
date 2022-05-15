@@ -29,4 +29,13 @@
     <string name="msg_request_permission">Para utilizar a aplicação é necessário aceitar as permissões.</string>
     <string name="accept">Confirmar</string>
     <string name="title_activity_settings">Configurações</string>
+    <string name="tools">Ferramentas</string>
+    <string name="panel">Painel</string>
+    <string name="home">Inicio</string>
+    <string name="settings">Configurações</string>
+    <string name="results">Resultados</string>
+    <string name="session">Sessão</string>
+    <string name="exit">Sair</string>
+    <string name="choose_child">Selecionar Criança</string>
+    <string name="children_s_registration">Cadastro de crianças</string>
 </resources>

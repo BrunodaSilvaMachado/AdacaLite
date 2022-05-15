@@ -7,43 +7,43 @@
         <item
                 android:id="@+id/nav_manage"
                 android:icon="@drawable/ic_menu_manage"
-                android:title="Tools"/>
+                android:title="@string/tools"/>
     </group>
 
-    <item android:title="Painel">
+    <item android:title="@string/panel">
         <menu>
             <item
                     android:id="@+id/nav_home"
                     android:icon="@drawable/ic_family_24dp"
-                    android:title="Home"/>
+                    android:title="@string/home"/>
             <item
                     android:id="@+id/nav_select"
                     android:icon="@drawable/baseline_list_24"
-                    android:title="Selecionar Criança"/>
+                    android:title="@string/choose_child"/>
             <item
                     android:id="@+id/nav_cadastro"
                     android:icon="@drawable/baseline_group_add_24"
-                    android:title="Cadastro de crianças"/>
+                    android:title="@string/children_s_registration"/>
 
             <item
                     android:id="@+id/nav_settings"
                     android:icon="@drawable/quantum_ic_settings_grey600_24"
-                    android:title="Settings"/>
+                    android:title="@string/settings"/>
 
             <item
                     android:id="@+id/nav_resultados"
                     android:icon="@drawable/ic_type_fusion_grey_big"
-                    android:title="Results"/>
+                    android:title="@string/results"/>
 
             <item
                     android:id="@+id/nav_session"
                     android:icon="@android:drawable/ic_lock_lock"
-                    android:title="Session"/>
+                    android:title="@string/session"/>
 
             <item
                     android:id="@+id/nav_exit"
                     android:icon="@drawable/baseline_close_24"
-                    android:title="Exit"/>
+                    android:title="@string/exit"/>
         </menu>
     </item>
 </menu>

@@ -34,4 +34,13 @@
     <string name="msg_request_permission">To use the app it is necessary to accept the permissions.</string>
     <string name="accept">Accept</string>
     <string name="title_activity_settings">Settings</string>
+    <string name="tools">Tools</string>
+    <string name="panel">Panel</string>
+    <string name="home">Home</string>
+    <string name="settings">Settings</string>
+    <string name="results">Results</string>
+    <string name="session">Session</string>
+    <string name="exit">Exit</string>
+    <string name="choose_child">Choose Child</string>
+    <string name="children_s_registration">Children\'s registration</string>
 </resources>
