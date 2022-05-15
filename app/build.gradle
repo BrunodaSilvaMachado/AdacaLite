@@ -1,14 +1,6 @@
 apply plugin: 'com.android.application'
 
 android {
-    /*signingConfigs {
-        config {
-            keyAlias 'br_myandroidkey'
-            keyPassword 'R$0deJaneir0'
-            storeFile file('C:/Users/Bruno/AndroidStudioProjects/android.jks')
-            storePassword 'nanomoluff'
-        }
-    }*/
     compileSdkVersion 32
     defaultConfig {
         applicationId "br.com.adaca.adacalite"
